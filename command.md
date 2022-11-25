@@ -101,14 +101,34 @@ npm, yarn,pip,NuGet,apt(advance package tool)
 ## cd hello;\
 
 
-# Environment vraibales
+# Environment variables  //you should not store sensative information in Environment variable
 ## printenv
 ## printenv PATH
 ## echo $PATH
-## export DB_USER=mosh 
-## echo $DB_USER
+## export DB_USER=mosh  //set rariable
+## echo $DB_USER OR printenv DB_USER  // to read it 
 ## docker ps -a
 
 ## docker start -i 
 
-## echo DB_USER=mosh >> .bashrc
+## echo DB_USER=mosh >> .bashrcb //append another file to .bashrcb file
+## ps
+## sleep 3
+## kill id(number)
+
+## sudo adduser bob
+## sudo useradd bob (the orginal api)
+
+# manage group
+
+## sudo groupadd developers
+## sudo groupadd developers bob  // add new user into the group
+
+# file permission
+
+##  echo echo hello > deploy.sh
+## cat deploy.sh
+## ls -l
+## .deploy.sh //we will get permission error
+## chmod g o u +x _x deploy.sh
+## chmod og_x+w-r *.sh
