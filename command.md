@@ -13,7 +13,20 @@ docker ps
 ```
 docker ps -a
 ```
-
+## best command
+```
+whoami
+pwd
+echo hello
+history
+!3   //to see the number of list history command
+```
+apt(advance package tool)
+apt list
+# see the location of shalf program
+```
+echo $0
+```
 ## to start the container to interact
 
 ```
@@ -44,6 +57,7 @@ npm, yarn,pip,NuGet,apt(advance package tool)
 ## mv  move or rename
 ## mkdir test
 ## mv test docker  /rename test to docker dir
+## mv hello.txt /etc //move file
 ## touch hello.txt file.txt file1.txt
 ## rm hello.tx file.txt file*
 ## rm -r  doker //toremove dir
@@ -67,7 +81,7 @@ npm, yarn,pip,NuGet,apt(advance package tool)
 ## ls -l /etc > files.txt
 
 # search files
-## grep -i hello file1.txt
+## grep -i hello file1.txt //-i to remove casesensative
 ## grep - hello file*
 ## grep -i -r hello . //to find directory
 ## grep -ir hello .
