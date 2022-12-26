@@ -54,10 +54,10 @@ deactivate
 
 - [x] It is represented by a Dockerfile and is literally a list of instructions that must be built.
 
--[x] A Docker container is a running instance
+- [x] A Docker container is a running instance
 of an image. 
 
--[x] To continue our apartment analogy from earlier, the image is the blueprint or set of
+- [x] To continue our apartment analogy from earlier, the image is the blueprint or set of
 plans for the apartment; the container is the actual, fully-built building.
 
 ## $\textcolor{green}{3.A:\ Create\ a\ dockerfile}$ 
