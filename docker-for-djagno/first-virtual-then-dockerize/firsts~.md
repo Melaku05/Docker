@@ -46,55 +46,62 @@ deactivate
  ## $\textcolor{green}{3.\ Dockerizing\ the\ django\ project}$ 
  ### $\textcolor{silver}{Know\ is\ the\ time\ we\ need\ to\ switch\ to\ docker\ by\ closing\ virtual\ environment}$ $\textcolor{green}{ ctrl\ +\ c}$ 
 
-
-```
-A Docker image is a snapshot in time of what a project contains. It is represented by a Dockerfile
-and is literally a list of instructions that must be built. A Docker container is a running instance
-of an image. To continue our apartment analogy from earlier, the image is the blueprint or set of
+### $\textcolor{red}{Note}$ 
+`
+- A Docker image is a snapshot in time of what a project contains.
+- It is represented by a Dockerfile and is literally a list of instructions that must be built.
+- A Docker container is a running instance
+of an image. 
+- To continue our apartment analogy from earlier, the image is the blueprint or set of
 plans for the apartment; the container is the actual, fully-built building.
-```
-
-## Create dockerfile
+`
+## $\textcolor{green}{3.A:\ Create\ a\ dockerfile}$ 
+### $\textcolor{green}{Open\ terminal\ and\ write}$ 
 ```
 touch Dockerfile
 ```
-### Add this to the Dockerfile
+### $\textcolor{green}{Add\ this\ to\ the\ Dockerfile}$ 
 
 ```
 # Pull base image
 FROM python:3.8
 
 # Set environment variables
-ENV PIP_DISABLE_PIP_VERSION_CHECK 1   disables an automatic check for pip updates each time
-ENV PYTHONDONTWRITEBYTECODE 1 Python will not try to write .pyc files
-ENV PYTHONUNBUFFERED 1 ensures our console output is not buffered by Docker
+ENV PIP_DISABLE_PIP_VERSION_CHECK 1   # disables an automatic check for pip updates each time
+ENV PYTHONDONTWRITEBYTECODE 1 # Python will not try to write .pyc files
+ENV PYTHONUNBUFFERED 1 # ensures our console output is not buffered by Docker
 
 # Set work directory
 WORKDIR /code
 
 # Install dependencies
+COPY ./requirements.txt .
+RUN pip install -r requirements.txt
+
+# Install dependencies
 COPY Pipfile Pipfile.lock /code/
 RUN pip install pipenv && pipenv install --system
 
-# Install dependencies
-COPY ./requirements.txt .
-RUN pip install -r requirements.txt
 
 # Copy project
 COPY . .
 ```
 
-```
-Dockerfile s are read from top-to-bottom when an image is created.
-```
-## .dockerignore
-A .dockerignore file is a best practice way to specify certain files and directories that should not
+### $\textcolor{red}{Dockerfile\ s\ are\ read\ from\ top-to-bottom\ when\ an\ image\ is\ created.}$ 
+
+## $\textcolor{green}{.dockerignore file}$
+### $\textcolor{red}{A .dockerignore}$ file is a best practice way to specify certain files and directories that should not
 be included in a Docker image. This can help reduce overall image size and improves security by
 keeping things that are meant to be secret out of Docker.
 At the moment we can safely ignore the local virtual environment ( .venv ), our future .git
 directory, and a .gitignore file. In your text editor create a new file called .dockerignore in
 the base directory next to the existing manage.py 
-### put this on .dockerignore
+### $\textcolor{green}{Create .dockerfile}$
+```
+touch .dockerfile
+```
+### $\textcolor{green}{put\ this\ on\ .dockerignore}$
+## 
 ```
 .venv
 .git
