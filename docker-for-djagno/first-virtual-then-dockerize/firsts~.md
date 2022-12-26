@@ -5,12 +5,25 @@ mkdir pro && cd pro
 pipenv shell
 pipenv install django~=3.1.0
 ```
+```
+python -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip
+python -m pip install django~=4.0.0
 
+
+```
 ```
 django-admin startproject config .
 python manage.py migrate
 python mange.py runserver
+ctrl + c
+pip freeze > requirements.txt
+deactivate
 ```
+
+### requirements.txt should contain asgiref and sqlparse
+
 ## Know is the time we need to switch to docker by closing virtual environment
 ## ctrl + c
 
@@ -32,8 +45,9 @@ touch Dockerfile
 FROM python:3.8
 
 # Set environment variables
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
+ENV PIP_DISABLE_PIP_VERSION_CHECK 1   disables an automatic check for pip updates each time
+ENV PYTHONDONTWRITEBYTECODE 1 Python will not try to write .pyc files
+ENV PYTHONUNBUFFERED 1 ensures our console output is not buffered by Docker
 
 # Set work directory
 WORKDIR /code
@@ -42,12 +56,28 @@ WORKDIR /code
 COPY Pipfile Pipfile.lock /code/
 RUN pip install pipenv && pipenv install --system
 
+# Install dependencies
+COPY ./requirements.txt .
+RUN pip install -r requirements.txt
+
 # Copy project
-COPY . /code/
+COPY . .
 ```
 
 ```
 Dockerfile s are read from top-to-bottom when an image is created.
+```
+## .dockerignore
+A .dockerignore file is a best practice way to specify certain files and directories that should not
+be included in a Docker image. This can help reduce overall image size and improves security by
+keeping things that are meant to be secret out of Docker.
+At the moment we can safely ignore the local virtual environment ( .venv ), our future .git
+directory, and a .gitignore file. In your text editor create a new file called .dockerignore in
+the base directory next to the existing manage.py file.Chapter 2: Docker Hello, World!
+29
+.venv
+.git
+.gitignore
 ```
 
 `
@@ -80,6 +110,10 @@ Python packaging.
 docker build .
 ```
 ## create docker-compose file
+`
+In order to run the container
+we need a list of instructions in a file called docker-compose.yml .
+`
 
 `
 Moving on we now need to create a docker-compose.yml file to control how to run the container
@@ -91,6 +125,7 @@ touch docker-compose.yml
 ### put this in to docker-compose file
 ```
 version: '3.8' # Docker Compose which is currently 3.8 .
+version: '3.9'
 services:    # containers
   web:
     build: .
@@ -103,9 +138,14 @@ services:    # containers
       - db
 
   db:
-    image: postgres:11
+    image: postgres:13
+    volumes:
+-      postgres_data:/var/lib/postgresql/data/
     environment:
       - "POSTGRES_HOST_AUTH_METHOD=trust"
+
+volumes:
+- postgres_data:
 ```
 
 `
@@ -142,6 +182,20 @@ using it with Django:
 . write a docker-compose.yml file and run the container with docker-compose up
 `
 
+`
+• create a Dockerfile with custom image instructions
+• add a .dockerignore file
+• build the image
+• create a docker-compose.yml file
+• spin up the container(s)
+`
+`
+Stop the currently running container with Control+c
+`
+` Stop all of the container 
+docker-compose down
+`
+
 # Normally I don’t recommend running migrate on new projects until after a custom user model
 has been configured.
 
@@ -170,3 +224,26 @@ Now run docker-compose up -d which will rebuild our image and spin up two contai
 running PostgreSQL within db and the other our Django web server.
 .
 `.
+
+# Psycopg is, the most popular database dapter for Python.
+
+```
+docker-compose exec web pipenv install psycopg2-binary==2.8.5
+```
+
+ `
+whenever adding a new package first install it within Docker, stop the containers,
+force an image rebuild, and then start the containers up again. We’ll use this flow repeatedly
+throughout the book.
+
+`
+```
+docker-compose down
+docker-compose up -d --build
+```
+
+```
+docker-compose exec web python manage.py migrate
+docker-compose exec web python manage.py createsuperuser
+```
+
