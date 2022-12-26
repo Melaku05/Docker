@@ -1,4 +1,4 @@
-# $\textcolor{yellow}{Docker\ for\ Django\ projects\ settup\}$
+# $\textcolor{green}{Docker\ for\ Django\ projects\ settup\}$
 # First virtual environment
 
 ```
