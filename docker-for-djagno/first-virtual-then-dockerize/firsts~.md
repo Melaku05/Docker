@@ -1,25 +1,39 @@
-# $\textcolor{green}{Docker\ for\ Django\ projects\ settup\}$
+# $\textcolor{green}{Docker\ for\ Django\ projects\ settup}$
 
 
-$\textcolor{green}{Docker}$ is a self-contained environment that includes everything we need for local development: web services, databases, and more if we want. The general pattern will always be the same when using it with Django: • create a virtual environment locally and install Django • create a new project • exit the virtual environment • write a Dockerfile and then build the initial image . write a docker-compose.yml file and run the container with docker-compose up
+$\textcolor{green}{Docker}$ is a way to isolate an entire operating system via Linux containers which are a type
+of virtualization 
 
-• create a Dockerfile with custom image instructions • add a .dockerignore file • build the image • create a docker-compose.yml file • spin up the container(s) Stop the currently running container with Control+c Stop all of the container  docker-compose down
+$\textcolor{green}{Docker}$ is a self-contained environment that includes everything we need for local development:
+ -  web services, 
+ - databases, and more if we want. 
+ ## $\textcolor{green}{The\ general\ pattern\ will\ always\ be\ the\ same\ when\ using\ it\ with\ Django:}$ 
+  - create a virtual environment locally and install Django
+  - create a new project
+  - exit the virtual environment 
+  - write a Dockerfile and then build the initial image 
+  - write a docker-compose.yml file and run the container with docker-compose up
 
-```
-mkdir pro && cd pro
-pipenv shell
-pipenv install django~=3.1.0
-```
+## $\textcolor{green}{ 1.\ Create\ a\ Virtual\ Environment\ and\ install\ Django\ stable\ version}$
+
 ```
 python -m venv .venv
 source .venv/bin/activate
 python -m pip install --upgrade pip
 python -m pip install django~=4.0.0
 
+```
+### $\textcolor{green}{Alternatively}$ 
+```
+pip install pipenv
+pipenv shell
+pipenv install django~=3.1.0
+```
 
+## $\textcolor{green}{2.\ Create\ a\ Django\ project\ inside\ the\ virtual\ environment}$
+### $\textcolor{red}{Normally\ I\ don’t\ recommend\ running\ migrate\ on\ new\ projects\ until\ after\ a\ custom\ user\ model}$ 
 ```
-```
-django-admin startproject config .
+django-admin startproject projectNameHere! .
 python manage.py migrate
 python mange.py runserver
 ctrl + c
@@ -27,10 +41,11 @@ pip freeze > requirements.txt
 deactivate
 ```
 
-### requirements.txt should contain asgiref and sqlparse
+### $\textcolor{red}{requirements.txt\ should\ contain\ asgiref\ and\ sqlparse}$ 
+ 
+ ## $\textcolor{green}{3.\ Dockerizing\ the\ django\ project}$ 
+ ### $\textcolor{silver}{Know\ is\ the\ time\ we\ need\ to\ switch\ to\ docker\ by\ closing\ virtual\ environment}$ $\textcolor{green}{ ctrl\ +\ c}$ 
 
-## Know is the time we need to switch to docker by closing virtual environment
-## ctrl + c
 
 ```
 A Docker image is a snapshot in time of what a project contains. It is represented by a Dockerfile
