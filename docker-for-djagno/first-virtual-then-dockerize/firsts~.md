@@ -50,9 +50,9 @@ deactivate
 
 ### $\textcolor{red}{Note}$ 
 
--[x] A Docker image is a snapshot in time of what a project contains.
+- [x] A Docker image is a snapshot in time of what a project contains.
 
--[x] It is represented by a Dockerfile and is literally a list of instructions that must be built.
+- [x] It is represented by a Dockerfile and is literally a list of instructions that must be built.
 
 -[x] A Docker container is a running instance
 of an image. 
