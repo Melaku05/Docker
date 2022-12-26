@@ -17,6 +17,8 @@ $\textcolor{green}{Docker}$ is a self-contained environment that includes everyt
 ## $\textcolor{green}{ 1.\ Create\ a\ Virtual\ Environment\ and\ install\ Django\ stable\ version}$
 
 ```
+mkdir projectDirName
+cd projectDirName
 python -m venv .venv
 source .venv/bin/activate
 python -m pip install --upgrade pip
@@ -47,14 +49,17 @@ deactivate
  ### $\textcolor{silver}{Know\ is\ the\ time\ we\ need\ to\ switch\ to\ docker\ by\ closing\ virtual\ environment}$ $\textcolor{green}{ ctrl\ +\ c}$ 
 
 ### $\textcolor{red}{Note}$ 
-`
-- A Docker image is a snapshot in time of what a project contains.
-- It is represented by a Dockerfile and is literally a list of instructions that must be built.
-- A Docker container is a running instance
+
+-[x] A Docker image is a snapshot in time of what a project contains.
+
+-[x] It is represented by a Dockerfile and is literally a list of instructions that must be built.
+
+-[x] A Docker container is a running instance
 of an image. 
-- To continue our apartment analogy from earlier, the image is the blueprint or set of
+
+-[x] To continue our apartment analogy from earlier, the image is the blueprint or set of
 plans for the apartment; the container is the actual, fully-built building.
-`
+
 ## $\textcolor{green}{3.A:\ Create\ a\ dockerfile}$ 
 ### $\textcolor{green}{Open\ terminal\ and\ write}$ 
 ```
