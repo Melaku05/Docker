@@ -73,8 +73,9 @@ be included in a Docker image. This can help reduce overall image size and impro
 keeping things that are meant to be secret out of Docker.
 At the moment we can safely ignore the local virtual environment ( .venv ), our future .git
 directory, and a .gitignore file. In your text editor create a new file called .dockerignore in
-the base directory next to the existing manage.py file.Chapter 2: Docker Hello, World!
-29
+the base directory next to the existing manage.py 
+### put this on .dockerignore
+```
 .venv
 .git
 .gitignore
