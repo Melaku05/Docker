@@ -1,5 +1,9 @@
 # $\textcolor{green}{Docker\ for\ Django\ projects\ settup\}$
-# First virtual environment
+
+
+$\textcolor{green}{Docker}$ is a self-contained environment that includes everything we need for local development: web services, databases, and more if we want. The general pattern will always be the same when using it with Django: • create a virtual environment locally and install Django • create a new project • exit the virtual environment • write a Dockerfile and then build the initial image . write a docker-compose.yml file and run the container with docker-compose up
+
+• create a Dockerfile with custom image instructions • add a .dockerignore file • build the image • create a docker-compose.yml file • spin up the container(s) Stop the currently running container with Control+c Stop all of the container  docker-compose down
 
 ```
 mkdir pro && cd pro
